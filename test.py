@@ -23,9 +23,9 @@ for i in timeIntervals:
 
 
 # get data on this ticker
-start = datetime(2020, 5, 29)
+start = datetime(2019, 12, 5)
 microsoftTicker = yf.Ticker("MSFT")
-msftHistory = microsoftTicker.history(period='1d', start=start, end=start + week, interval="1m")
+msftHistory = microsoftTicker.history(period='1d', start=start, end=datetime.today(), interval="1d")
 
 # print(msftHistory)
 # for i in msftHistory:
@@ -41,12 +41,12 @@ fftX = np.linspace(0,100, 100)
 
 sns.set_style("dark")
 sns.set_context("paper", font_scale=1.3, rc={"lines.linewidth": 1})
-# fig = plt.figure(num=None, figsize=(8, 3), dpi=80)
-# axes = fig.add_subplot()
-# axes.plot(xAxis, stockData)
-# axes.grid()
-# fig.tight_layout()
+fig = plt.figure(num=None, figsize=(8, 3), dpi=80)
+axes = fig.add_subplot()
+axes.plot(xAxis, stockData)
+axes.grid()
+fig.tight_layout()
 
-axes2 = plt.figure(num=None, figsize=(8, 3), dpi=80).add_subplot()
-axes2.plot(fftX, [np.abs(fft(stockData))[i] for i in range(len(fftX))])
+# axes2 = plt.figure(num=None, figsize=(8, 3), dpi=80).add_subplot()
+# axes2.plot(fftX, [np.abs(fft(stockData))[i] for i in range(len(fftX))])
 plt.show()
