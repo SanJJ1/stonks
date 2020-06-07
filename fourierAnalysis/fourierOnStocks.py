@@ -10,7 +10,7 @@ from datetime import timedelta
 
 a = datetime(2003, 8, 5)  # Sets up convenient time intervals for use
 hour = timedelta(1 / 24)
-sixHour = timedelta(1 / 6)
+sixHour = timedelta(1 / 4)
 day = timedelta(1)
 week = timedelta(7)
 month = timedelta(30)
