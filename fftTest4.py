@@ -1,8 +1,9 @@
 from scipy.fft import fft, ifft
 import numpy as np
 import matplotlib.pyplot as plt
+import sympy.ntheory as nt
 
-c = {"red": (255, 0, 0),
+c = {"red": (255, 0, 0),  # Formats colors
      "green": (0, 255, 0),
      "blue": (0, 0, 255),
      "yellow": (255, 238, 0),
@@ -10,21 +11,33 @@ c = {"red": (255, 0, 0),
 for i in c:
     c[i] = [x / 255 for x in c[i]]
 
-numValues = 1000
-sampleSpacing = 1/10000
-basis = np.linspace(0, sampleSpacing * numValues, num=numValues)
-x = np.sin(basis * 2 * np.pi * 1) + np.sin(basis * 2 * np.pi * 10)
-y = fft(x)
+# Start of Fourier analysis
+numSamples = 750
+sampleFrequency = 750 ** -1
+basis = np.linspace(0, sampleFrequency * numSamples, num=numSamples + 1)
+
+freqComps = [[-1/(i+1), i+1] for i in range(350) if not i % 2]  # frequency components for square wave.
+x = sum([i[0] * np.sin(basis * 2 * np.pi * i[1]) for i in freqComps])  # creates signal with components of freqComps
+
+print(basis)
+print(x)
+y = fft(x)[:numSamples // 2]
 yinv = ifft(y)
 
-plt.plot(x, color=c["red"])
+plt.axhline(y=0, color=c["black"])
+plt.axvline(x=0, color=c["black"])
+plt.plot(basis, x, color=c["red"])
+# plt.plot(basis[:numSamples//2], np.real(yinv) / 2 - 2, ".")  # Inverse Inverse FTT
 
-fourierGraphs = [(np.abs(y), "green"), (np.real(y), "blue"), (np.imag(y), "yellow"), (np.zeros(numValues), "black")]
+
+# fourierGraphs = [(np.abs(y), "green"), (np.real(y), "blue"), (np.imag(y), "yellow"), (np.zeros(numSamples), "black")]
 
 axes2 = plt.figure().add_subplot()
+axes2.plot(np.linspace(0, sampleFrequency ** -1, num=numSamples + 1)[:numSamples // 2], np.abs(y) * 2 / numSamples)
+# axes2.plot(np.linspace(0, sampleFrequency ** -1, num=numSamples + 1)[:numSamples // 2], np.real(yinv), ".") # Inverse
+# Inverse, but it's on frequency domain
 
-for i in fourierGraphs:
-    axes2.plot(i[0][:int(numValues*.01)]/numValues, color=c[i[1]])
-
+# for i in fourierGraphs:
+#     axes2.plot(i[0][:int(numSamples * .01)] / numSamples, color=c[i[1]])
 
 plt.show()

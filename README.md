@@ -37,3 +37,5 @@
 [SciPy Interpolate, including taylor series](https://docs.scipy.org/doc/scipy/reference/interpolate.html#module-scipy.interpolate)
 
 [Discrete Fourier Transform/Series explanation](https://www.youtube.com/watch?v=mkGsMWi_j4Q&list=WL&index=2&t=0s)
+
+----
