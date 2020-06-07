@@ -12,11 +12,11 @@ for i in c:
     c[i] = [x / 255 for x in c[i]]
 
 # Start of Fourier analysis
-numSamples = 320
-sampleFrequency = 320 ** -1
+numSamples = 3200
+sampleFrequency = 3200 ** -1
 basis = np.linspace(0, sampleFrequency * numSamples, num=numSamples + 1)
 
-freqComps = [[-1/(i+1), i+1] for i in range(350) if not i % 2]  # frequency components for square wave.
+freqComps = [[1, 80], [1, 40]]  # frequency components for square wave.
 x = sum([i[0] * np.sin(basis * 2 * np.pi * i[1]) for i in freqComps])  # creates signal with components of freqComps
 
 print(basis)
