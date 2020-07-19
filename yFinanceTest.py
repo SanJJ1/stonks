@@ -27,7 +27,6 @@ start = datetime(2019, 6, 7)
 microsoftTicker = yf.Ticker("msft")
 msftHistory = microsoftTicker.history(period='1d', start=start, end=today, interval="1h")
 
-print(msftHistory)
 # for i in msftHistory:
 #     print(msftHistory[i], i)
 stockData = msftHistory["Open"].tolist()
