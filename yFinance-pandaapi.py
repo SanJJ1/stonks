@@ -3,7 +3,7 @@ import csv
 from pandas_datareader import data as pdr
 from datetime import date
 import yfinance as yf
-from sympy.utilities.matchpy_connector import _
+# from sympy.utilities.matchpy_connector import _
 
 yf.pdr_override()
 import pandas as pd
