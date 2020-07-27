@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 
 # Sets the number of samples to be used in the dft (Discrete Fourier Transform)
-numSamples = 10000
+numSamples = 3200
 
 # Sets the frequency (the spacing) of the samples in the dft
 sampleFrequency = 3200 ** -1
@@ -16,7 +16,7 @@ basis = np.linspace(0, sampleFrequency * numSamples, num=numSamples + 1)
 # frequency components for square wave below. Each element in the array is an array
 # of length two where the first element is the amplitude  of the wave and the second is the
 # frequency of the wave.
-freqComps = [[1, 800], [1, 40]]
+freqComps = [[1, 80], [1, 40]]
 
 # creates a signal with components listed in the variable freqComps
 x = sum([i[0] * np.sin(basis * 2 * np.pi * i[1]) for i in freqComps])
