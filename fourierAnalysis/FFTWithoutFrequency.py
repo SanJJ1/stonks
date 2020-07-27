@@ -7,9 +7,9 @@ import matplotlib.pyplot as plt
 numSamples = 3200
 
 # Sets the frequency (the spacing) of the samples in the dft
-sampleFrequency = 3200 ** -1
+sampleFrequency = 320 ** -1
 
-# Creates what essentially becomes the x-axis for the dft
+# Creates what essentially becomes the rgbVal-axis for the dft
 basis = np.linspace(0, sampleFrequency * numSamples, num=numSamples + 1)
 
 
@@ -24,7 +24,7 @@ x = sum([i[0] * np.sin(basis * 2 * np.pi * i[1]) for i in freqComps])
 # takes the left side of the discrete Fourier Transform
 y = fft(x)[:numSamples // 2]
 
-# takes the inverse Fourier Transform of y, expected to result in x.
+# takes the inverse Fourier Transform of y, expected to result in rgbVal.
 yinv = ifft(y)
 
 # Simply sets the colors to be used when graphing
