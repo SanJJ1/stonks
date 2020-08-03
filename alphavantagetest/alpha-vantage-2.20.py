@@ -10,7 +10,6 @@ api_key = 'CE5874ROQF7V2C3N'
 ts = TimeSeries(key=api_key, output_format='pandas')
 data, meta_data = ts.get_intraday(symbol='MSFT',interval='1min', outputsize='full')
 pprint(data.head(4))
-
 #Graphing stock data
 data['4. close'].plot()
 plt.title('Intraday Times Series for the MSFT stock (1 min)')
