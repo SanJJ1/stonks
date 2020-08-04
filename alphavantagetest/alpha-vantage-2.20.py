@@ -22,47 +22,46 @@ data1.plot()
 plt.title('BBbands indicator for  MSFT stock (60 min)')
 '''
 
-#Company Overview
+# Company Overview
 
 companyTickerName = input('Which ticker do you want information for?: ')
 companyOverviewUrl = f"https://www.alphavantage.co/query?function=OVERVIEW&symbol={companyTickerName}&apikey={api_key}"
 
 payload = {}
-headers= {}
+headers = {}
 
-response = requests.request("GET", companyOverviewUrl, headers=headers, data = payload)
+response = requests.request("GET", companyOverviewUrl, headers=headers, data=payload)
 
 print(response.text.encode('utf8'))
 
-#Income_Statement
+# Income_Statement
 incomeStatementUrl = f"https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol={companyTickerName}&apikey={api_key}"
 
 payload = {}
-headers= {}
+headers = {}
 
-response = requests.request("GET", incomeStatementUrl, headers=headers, data = payload)
+response = requests.request("GET", incomeStatementUrl, headers=headers, data=payload)
 
 print(response.text.encode('utf8'))
 
-#Balance Sheet
+# Balance Sheet
 balanceSheetUrl = f"https://www.alphavantage.co/query?function=BALANCE_SHEET&symbol={companyTickerName}&apikey={api_key}"
 
 payload = {}
 headers = {}
 
-response = requests.request("GET", balanceSheetUrl, headers=headers, data = payload)
+response = requests.request("GET", balanceSheetUrl, headers=headers, data=payload)
 
 print(response.text.encode('utf8'))
 
-#Cash Flow
+# Cash Flow
 cashFlowUrl = f"https://www.alphavantage.co/query?function=CASH_FLOW&symbol={companyTickerName}&apikey={api_key}"
 
 payload = {}
 headers = {}
 
-response = requests.request("GET", cashFlowUrl, headers=headers, data = payload)
+response = requests.request("GET", cashFlowUrl, headers=headers, data=payload)
 
 print(response.text.encode('utf8'))
 
-
-#plt.show()
+# plt.show()
