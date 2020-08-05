@@ -132,7 +132,8 @@ def download_from_url(file_name, url_input):
 
     open(f'downloads\\{file_name}.pdf', 'wb').write(response.content)
 
-
+input("pause:   ")
+print('resumed')
 for pair in text_and_link:
     download_from_url(*pair)
 
