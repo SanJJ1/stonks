@@ -18,7 +18,7 @@ x = msft
 # takes the left side of the discrete Fourier Transform
 y = fft(x)[:len(x) // 2]
 
-# takes the inverse Fourier Transform of y, expected to result in rgbVal.
+# takes the inverse Fourier Transform of y, expected to result in x.
 # yinv = ifft(y)
 
 # Simply sets the colors to be used when graphing
