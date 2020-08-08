@@ -1,9 +1,11 @@
+import shelve
+
 from alpha_vantage.timeseries import TimeSeries
 from pprint import pprint
 import matplotlib.pyplot as plt
 from alpha_vantage.techindicators import TechIndicators
 import requests
-
+import shelves
 api_key = 'CE5874ROQF7V2C3N'
 '''
 #getting stock info
@@ -22,17 +24,18 @@ data1.plot()
 plt.title('BBbands indicator for  MSFT stock (60 min)')
 '''
 
+companyTickerName = input('Which ticker do you want information for?: ')
+
 #Company Overview
 
-companyTickerName = input('Which ticker do you want information for?: ')
 companyOverviewUrl = f"https://www.alphavantage.co/query?function=OVERVIEW&symbol={companyTickerName}&apikey={api_key}"
 
 payload = {}
 headers= {}
 
-response = requests.request("GET", companyOverviewUrl, headers=headers, data = payload)
+companyOverviewEncoded = requests.request("GET", companyOverviewUrl, headers=headers, data = payload).text.encode('utf8')
 
-print(response.text.encode('utf8'))
+#print(response.text.encode('utf8'))
 
 #Income_Statement
 incomeStatementUrl = f"https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol={companyTickerName}&apikey={api_key}"
@@ -40,9 +43,9 @@ incomeStatementUrl = f"https://www.alphavantage.co/query?function=INCOME_STATEME
 payload = {}
 headers= {}
 
-response = requests.request("GET", incomeStatementUrl, headers=headers, data = payload)
+incomeStatementEncoded = requests.request("GET", incomeStatementUrl, headers=headers, data = payload).text.encode('utf8')
 
-print(response.text.encode('utf8'))
+#print(response.text.encode('utf8'))
 
 #Balance Sheet
 balanceSheetUrl = f"https://www.alphavantage.co/query?function=BALANCE_SHEET&symbol={companyTickerName}&apikey={api_key}"
@@ -50,9 +53,9 @@ balanceSheetUrl = f"https://www.alphavantage.co/query?function=BALANCE_SHEET&sym
 payload = {}
 headers = {}
 
-response = requests.request("GET", balanceSheetUrl, headers=headers, data = payload)
+balanceSheetEncoded = requests.request("GET", balanceSheetUrl, headers=headers, data = payload).text.encode('utf8')
 
-print(response.text.encode('utf8'))
+#print()
 
 #Cash Flow
 cashFlowUrl = f"https://www.alphavantage.co/query?function=CASH_FLOW&symbol={companyTickerName}&apikey={api_key}"
@@ -60,9 +63,18 @@ cashFlowUrl = f"https://www.alphavantage.co/query?function=CASH_FLOW&symbol={com
 payload = {}
 headers = {}
 
-response = requests.request("GET", cashFlowUrl, headers=headers, data = payload)
+cashFlowEncoded = requests.request("GET", cashFlowUrl, headers=headers, data = payload).text.encode('utf8')
 
-print(response.text.encode('utf8'))
+#print(response.text.encode('utf8'))
+testShelves = shelve.open('allStats')
 
+with testShelves as stats:
+    stats['companyOverview'] = companyOverviewEncoded
+    stats['incomeStatement'] = incomeStatementEncoded
+    stats['balanceSheet'] = balanceSheetEncoded
+    stats['cashFlow'] = cashFlowEncoded
+
+for i in testShelves:
+    print(i, testShelves[i])
 
 #plt.show()
