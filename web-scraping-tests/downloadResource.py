@@ -13,19 +13,3 @@ headers = {
 }
 
 response = requests.request("GET", url, headers=headers)
-
-open('downloads\\facebook.pdf', 'wb').write(response.content)
-
-def download_from_url(url_input, file_name):
-  url = url_input
-  user = 'sjanardhan'
-  pw = 'Krisna3227'
-  encoded = base64.b64encode(bytes(f"{user}:{pw}", 'utf-8'), altchars=None)
-  basic_auth_key = f"Basic {encoded.decode('utf-8')}"
-  headers = {
-    'Authorization': basic_auth_key,
-  }
-
-  response = requests.request("GET", url, headers=headers)
-
-  open(f'downloads\\{file_name}', 'wb').write(response.content)
