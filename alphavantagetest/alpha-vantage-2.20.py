@@ -66,15 +66,15 @@ headers = {}
 cashFlowEncoded = requests.request("GET", cashFlowUrl, headers=headers, data = payload).text.encode('utf8')
 
 #print(response.text.encode('utf8'))
-testShelves = shelve.open('allStats')
 
-with testShelves as stats:
+with shelve.open('allStats') as stats:
     stats['companyOverview'] = companyOverviewEncoded
     stats['incomeStatement'] = incomeStatementEncoded
     stats['balanceSheet'] = balanceSheetEncoded
     stats['cashFlow'] = cashFlowEncoded
 
-for i in testShelves:
-    print(i, testShelves[i])
+with shelve.open('allStats') as stats:
+    for i in stats:
+        print(i, stats[i])
 
 #plt.show()
