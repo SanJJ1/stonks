@@ -29,4 +29,4 @@ def get_time_series(ticker='TSLA', interval=3):
 
 with shelve.open('stock_data') as db:
     for i in db:
-        print(i)
+        print(i, db[i])

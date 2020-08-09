@@ -1,10 +1,12 @@
+import shelve
+import json
 from alpha_vantage.timeseries import TimeSeries
 from pprint import pprint
 import matplotlib.pyplot as plt
 from alpha_vantage.techindicators import TechIndicators
 import requests
-
 api_key = 'CE5874ROQF7V2C3N'
+
 '''
 #getting stock info
 ts = TimeSeries(key=api_key, output_format='pandas')
@@ -22,46 +24,68 @@ data1.plot()
 plt.title('BBbands indicator for  MSFT stock (60 min)')
 '''
 
-# Company Overview
-
 companyTickerName = input('Which ticker do you want information for?: ')
+
+#Company Overview
+
 companyOverviewUrl = f"https://www.alphavantage.co/query?function=OVERVIEW&symbol={companyTickerName}&apikey={api_key}"
 
 payload = {}
-headers = {}
+headers= {}
 
-response = requests.request("GET", companyOverviewUrl, headers=headers, data=payload)
+companyOverviewEncoded = requests.request("GET", companyOverviewUrl, headers=headers, data = payload).text.encode('utf8')
 
-print(response.text.encode('utf8'))
 
-# Income_Statement
+#Income_Statement
 incomeStatementUrl = f"https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol={companyTickerName}&apikey={api_key}"
 
 payload = {}
-headers = {}
+headers= {}
 
-response = requests.request("GET", incomeStatementUrl, headers=headers, data=payload)
+incomeStatementEncoded = requests.request("GET", incomeStatementUrl, headers=headers, data = payload).text.encode('utf8')
 
-print(response.text.encode('utf8'))
 
-# Balance Sheet
+#Balance Sheet
 balanceSheetUrl = f"https://www.alphavantage.co/query?function=BALANCE_SHEET&symbol={companyTickerName}&apikey={api_key}"
 
 payload = {}
 headers = {}
 
-response = requests.request("GET", balanceSheetUrl, headers=headers, data=payload)
+balanceSheetEncoded = requests.request("GET", balanceSheetUrl, headers=headers, data = payload).text.encode('utf8')
 
-print(response.text.encode('utf8'))
 
-# Cash Flow
+#Cash Flow
 cashFlowUrl = f"https://www.alphavantage.co/query?function=CASH_FLOW&symbol={companyTickerName}&apikey={api_key}"
 
 payload = {}
 headers = {}
 
-response = requests.request("GET", cashFlowUrl, headers=headers, data=payload)
+cashFlowEncoded = requests.request("GET", cashFlowUrl, headers=headers, data = payload).text.encode('utf8')
 
-print(response.text.encode('utf8'))
 
-# plt.show()
+#Shelving info
+with shelve.open('allStats') as stats:
+    stats['companyOverview'] = companyOverviewEncoded
+    stats['incomeStatement'] = incomeStatementEncoded
+    stats['balanceSheet'] = balanceSheetEncoded
+    stats['cashFlow'] = cashFlowEncoded
+
+'''
+#Printing from the shelve
+with shelve.open('allStats') as stats:
+    for i in stats:
+        print(i, stats[i])
+'''
+
+#Getting Specific Data
+with shelve.open('allStats') as stats:
+    loadOverview = json.loads(stats['companyOverview'].decode('utf8'))
+    '''
+    for i in loadOverview:
+        allInfoList= list(loadOverview[i])
+    print('Available Info: ' + allInfoList)
+    '''
+    whatInfo = input('What Info do you want?:').strip()
+    print(f'{whatInfo}: ' + loadOverview[f'{whatInfo}'])
+
+#plt.show()
