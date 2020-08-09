@@ -4,7 +4,7 @@ import datetime
 import json
 import pprint as pp
 api_key = 'CE5874ROQF7V2C3N'
-
+# Sanjay's API key: '4YFNRPL4DM78QYDY'
 
 def get_time_series(ticker='TSLA', interval=3):
     intervals = ['INTRADAY', 'DAILY', 'DAILY_ADJUSTED', 'WEEKLY', 'WEEKLY_ADJUSTED', 'MONTHLY', 'MONTHLY_ADJUSTED']
