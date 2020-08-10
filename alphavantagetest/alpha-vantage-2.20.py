@@ -80,11 +80,10 @@ with shelve.open('allStats') as stats:
 #Getting Specific Data
 with shelve.open('allStats') as stats:
     loadOverview = json.loads(stats['companyOverview'].decode('utf8'))
-    '''
-    for i in loadOverview:
-        allInfoList= list(loadOverview[i])
-    print('Available Info: ' + allInfoList)
-    '''
+    print('Available Info: ')
+    print(loadOverview.keys())
+
+
     whatInfo = input('What Info do you want?:').strip()
     print(f'{whatInfo}: ' + loadOverview[f'{whatInfo}'])
 
