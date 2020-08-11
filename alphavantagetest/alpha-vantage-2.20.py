@@ -5,6 +5,7 @@ from pprint import pprint
 import matplotlib.pyplot as plt
 from alpha_vantage.techindicators import TechIndicators
 import requests
+
 api_key = 'CE5874ROQF7V2C3N'
 
 '''
@@ -26,44 +27,40 @@ plt.title('BBbands indicator for  MSFT stock (60 min)')
 
 companyTickerName = input('Which ticker do you want information for?: ')
 
-#Company Overview
+# Company Overview
 
 companyOverviewUrl = f"https://www.alphavantage.co/query?function=OVERVIEW&symbol={companyTickerName}&apikey={api_key}"
 
 payload = {}
-headers= {}
+headers = {}
 
-companyOverviewEncoded = requests.request("GET", companyOverviewUrl, headers=headers, data = payload).text.encode('utf8')
+companyOverviewEncoded = requests.request("GET", companyOverviewUrl, headers=headers, data=payload).text.encode('utf8')
 
-
-#Income_Statement
+# Income_Statement
 incomeStatementUrl = f"https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol={companyTickerName}&apikey={api_key}"
 
 payload = {}
-headers= {}
+headers = {}
 
-incomeStatementEncoded = requests.request("GET", incomeStatementUrl, headers=headers, data = payload).text.encode('utf8')
+incomeStatementEncoded = requests.request("GET", incomeStatementUrl, headers=headers, data=payload).text.encode('utf8')
 
-
-#Balance Sheet
+# Balance Sheet
 balanceSheetUrl = f"https://www.alphavantage.co/query?function=BALANCE_SHEET&symbol={companyTickerName}&apikey={api_key}"
 
 payload = {}
 headers = {}
 
-balanceSheetEncoded = requests.request("GET", balanceSheetUrl, headers=headers, data = payload).text.encode('utf8')
+balanceSheetEncoded = requests.request("GET", balanceSheetUrl, headers=headers, data=payload).text.encode('utf8')
 
-
-#Cash Flow
+# Cash Flow
 cashFlowUrl = f"https://www.alphavantage.co/query?function=CASH_FLOW&symbol={companyTickerName}&apikey={api_key}"
 
 payload = {}
 headers = {}
 
-cashFlowEncoded = requests.request("GET", cashFlowUrl, headers=headers, data = payload).text.encode('utf8')
+cashFlowEncoded = requests.request("GET", cashFlowUrl, headers=headers, data=payload).text.encode('utf8')
 
-
-#Shelving info
+# Shelving info
 with shelve.open('allStats') as stats:
     stats['companyOverview'] = companyOverviewEncoded
     stats['incomeStatement'] = incomeStatementEncoded
@@ -77,7 +74,7 @@ with shelve.open('allStats') as stats:
         print(i, stats[i])
 '''
 
-#Getting Specific Data
+# Getting Specific Data
 with shelve.open('allStats') as stats:
     loadOverview = json.loads(stats['companyOverview'].decode('utf8'))
     '''
@@ -88,4 +85,4 @@ with shelve.open('allStats') as stats:
     whatInfo = input('What Info do you want?:').strip()
     print(f'{whatInfo}: ' + loadOverview[f'{whatInfo}'])
 
-#plt.show()
+# plt.show()
