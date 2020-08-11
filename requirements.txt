@@ -27,7 +27,9 @@ jupyter-client==6.1.6
 jupyter-core==4.6.3
 jupyterlab==2.2.2
 jupyterlab-server==1.2.0
+jupyterthemes==0.20.0
 kiwisolver==1.2.0
+lesscpy==0.14.0
 lxml==4.5.2
 MarkupSafe==1.1.1
 matplotlib==3.2.2
@@ -45,6 +47,7 @@ pandas-datareader==0.9.0
 pandocfilters==1.4.2
 parso==0.7.1
 pickleshare==0.7.5
+ply==3.11
 prometheus-client==0.8.0
 prompt-toolkit==3.0.5
 pycparser==2.20
