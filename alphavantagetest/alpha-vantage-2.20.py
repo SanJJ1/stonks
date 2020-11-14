@@ -1,5 +1,6 @@
 import shelve
 import json
+import matplotlib.pyplot as plt
 from alpha_vantage.timeseries import TimeSeries
 from pprint import pprint
 import matplotlib.pyplot as plt
@@ -67,21 +68,11 @@ with shelve.open('allStats') as stats:
     stats['balanceSheet'] = balanceSheetEncoded
     stats['cashFlow'] = cashFlowEncoded
 
-'''
-#Printing from the shelve
-with shelve.open('allStats') as stats:
-    for i in stats:
-        print(i, stats[i])
-'''
 
 # Getting Specific Data
 with shelve.open('allStats') as stats:
     loadOverview = json.loads(stats['companyOverview'].decode('utf8'))
-    print('Available Info: ')
-    print(loadOverview.keys())
 
 
-    whatInfo = input('What Info do you want?:').strip()
-    print(f'{whatInfo}: ' + loadOverview[f'{whatInfo}'])
 
 # plt.show()
